@@ -5,11 +5,6 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      // {
-      //   name: 'timer',
-      //   path: '',
-      //   component: () => import('pages/offwork/IndexPage.vue'),
-      // },
       {
         name: 'weather',
         path: 'weather',

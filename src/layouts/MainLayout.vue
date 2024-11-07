@@ -11,14 +11,42 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <q-list>
-        <q-item v-for="m in menus" :key="m.label" clickable v-ripple :to="m.to">
-          <q-item-section avatar>
-            <q-icon :name="m.icon"></q-icon>
-          </q-item-section>
-          <q-item-section> {{ m.label }} </q-item-section>
-        </q-item>
-      </q-list>
+      <q-expansion-item icon="source" label="Source" default-opened>
+        <q-list>
+          <q-item
+            v-for="m in menus"
+            :key="m.label"
+            clickable
+            v-ripple
+            :to="m.to"
+          >
+            <q-item-section avatar>
+              <q-icon :name="m.icon"></q-icon>
+            </q-item-section>
+            <q-item-section> {{ m.label }} </q-item-section>
+          </q-item>
+        </q-list>
+      </q-expansion-item>
+
+      <q-separator />
+
+      <q-expansion-item icon="link" label="Outer Link">
+        <q-list>
+          <q-item
+            v-for="os in outers"
+            :key="os.label"
+            clickable
+            v-ripple
+            :href="os.link"
+            target="_blank"
+          >
+            <q-item-section avatar>
+              <q-icon :name="os.icon" />
+            </q-item-section>
+            <q-item-section>{{ os.label }}</q-item-section>
+          </q-item>
+        </q-list>
+      </q-expansion-item>
     </q-drawer>
 
     <q-page-container>
@@ -63,6 +91,19 @@ const menus = [
     label: '抽午餐',
     icon: 'support',
     to: 'slotmachine',
+  },
+];
+
+const outers = [
+  {
+    label: 'TinyMind',
+    icon: 'psychology',
+    link: 'https://tinymind.me/looperhuang',
+  },
+  {
+    label: 'fre321',
+    icon: 'article',
+    link: 'https://www.fre321.com/',
   },
 ];
 </script>
