@@ -25,7 +25,7 @@ const newsApi = axios.create({
 });
 
 const getTwHeadlines = async () => {
-  const apiKey = process.env.NewsAuth;
+  const apiKey = import.meta.env.VITE_APP_NEWSKEY;
   const url = `/v2/top-headlines?country=us&apiKey=${apiKey}`;
   const res = await newsApi.get<News>(url);
   return res.data;

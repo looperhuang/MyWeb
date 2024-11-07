@@ -25,7 +25,7 @@ const getWeatherDesc = async () => {
   const config: AxiosRequestConfig = {
     url: 'v1/rest/datastore/F-D0047-091',
     params: {
-      Authorization: process.env.GovAuth,
+      Authorization: import.meta.env.VITE_APP_GOVKEY,
       elementName: 'WeatherDescription',
       format: 'JSON',
     },

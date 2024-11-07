@@ -63,10 +63,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      env: {
-        GovAuth: 'CWA-01194D02-5C56-464D-88B6-1C9877A5D490',
-        NewsAuth: 'e0253490f1614dbd877606de72a3593a',
-      },
+      env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
