@@ -27,12 +27,15 @@ const calTimeLeft = () => {
   const offTime = new Date();
   offTime.setHours(17, 30, 0);
 
-  let timeDiff = offTime.getTime() - nowTime.getTime();
+  //檢查是否已經超過今天下班時間
+  if (nowTime > offTime) {
+    offTime.setDate(offTime.getDate() + 1);
+  }
 
+  const timeDiff = offTime.getTime() - nowTime.getTime();
   const hourLeft = Math.floor(timeDiff / (1000 * 60 * 60));
   const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
   const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
   timeLeft.value = {
     hours: hourLeft,
     minutes: minutesLeft,

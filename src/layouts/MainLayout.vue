@@ -46,17 +46,17 @@
         <q-btn dense flat icon="crop_square" @click="maxmize" />
         <q-btn dense flat icon="close" @click="closeApp" /> -->
       </q-bar>
+      <MarqueeBar />
     </q-header>
 
     <q-page-container>
-      <NetworkStatus />
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup lang="ts">
-import NetworkStatus from 'src/components/NetworkStatus.vue';
+import MarqueeBar from 'src/components/MarqueeBar.vue';
 
 // const closeApp = () => {
 //   window.close();
@@ -87,6 +87,11 @@ const menus = [
     label: '抽午餐',
     icon: 'support',
     to: 'slotmachine',
+  },
+  {
+    label: '輪盤',
+    icon: 'casino',
+    to: 'luckywheel',
   },
 ];
 

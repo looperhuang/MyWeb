@@ -35,6 +35,11 @@ const routes: RouteRecordRaw[] = [
         path: 'slotmachine',
         component: () => import('pages/slotmachine/IndexPage.vue'),
       },
+      {
+        name: 'luckywheel',
+        path: 'luckywheel',
+        component: () => import('pages/luckywheel/IndexPage.vue'),
+      },
     ],
   },
 

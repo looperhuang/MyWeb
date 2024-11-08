@@ -1,6 +1,6 @@
 <template>
-  <Vue3Marquee>
-    <span>
+  <Vue3Marquee class="bg-grey-8">
+    <span class="q-px-sm">
       Network status :
       <strong>{{ isOnline ? 'Online' : 'Offline' }}</strong>
       <q-icon
@@ -11,6 +11,8 @@
         You are currently offline. Some features may not be available.
       </span>
     </span>
+
+    <span class="q-px-sm">Now Time : {{ nowTime.toLocaleString() }}</span>
   </Vue3Marquee>
 </template>
 
@@ -19,12 +21,16 @@ import { Vue3Marquee } from 'vue3-marquee';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const isOnline = ref(navigator.onLine);
+const nowTime = ref(new Date());
 
 const updateNetworkStatus = () => {
   isOnline.value = navigator.onLine;
 };
 
 onMounted(() => {
+  window.setInterval(() => {
+    nowTime.value = new Date();
+  }, 1000);
   window.addEventListener('online', updateNetworkStatus);
   window.addEventListener('offline', updateNetworkStatus);
 });
