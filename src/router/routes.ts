@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
         path: 'luckywheel',
         component: () => import('pages/luckywheel/IndexPage.vue'),
       },
+      {
+        name: 'imgpreview',
+        path: 'imgpreview',
+        component: () => import('pages/ImgPreview/IndexPage.vue'),
+      },
     ],
   },
 

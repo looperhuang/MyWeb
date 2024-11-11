@@ -1,20 +1,22 @@
 <template>
-  <q-page class="q-pa-md">
-    <q-card flat>
-      <q-card-section>
-        <div class="text-h4 text-center">抽午餐</div>
-      </q-card-section>
+  <q-page class="flex flex-center">
+    <div style="width: 60%">
+      <q-card>
+        <q-card-section>
+          <div class="text-h4 text-center">抽午餐</div>
+        </q-card-section>
 
-      <q-card-section>
-        <div class="result-display text-h5 text-center">
-          {{ displayedResult }}
-        </div>
-      </q-card-section>
+        <q-card-section>
+          <div class="result-display text-h5 text-center">
+            {{ displayedResult }}
+          </div>
+        </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn label="開始" icon="play_circle" @click="spin" />
-      </q-card-actions>
-    </q-card>
+        <q-card-actions align="right">
+          <q-btn label="開始" icon="play_circle" @click="spin" />
+        </q-card-actions>
+      </q-card>
+    </div>
   </q-page>
 </template>
 

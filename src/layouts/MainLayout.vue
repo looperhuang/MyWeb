@@ -93,6 +93,11 @@ const menus = [
     icon: 'casino',
     to: 'luckywheel',
   },
+  {
+    label: '圖片預覽',
+    icon: 'image',
+    to: 'imgpreview',
+  },
 ];
 
 const outers = [
