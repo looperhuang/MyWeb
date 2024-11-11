@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-8" style="justify-items: center; align-self: center">
           <VueWheelSpinner
             style="max-width: 600px"
             ref="spinner"
