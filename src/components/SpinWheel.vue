@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 
 export interface Slice {
   color: string;
@@ -34,7 +34,7 @@ const currentAngle = ref(0);
 const spinningAudio = ref<HTMLAudioElement | null>(null);
 const wonAudio = ref<HTMLAudioElement | null>(null);
 
-const emits = defineEmits(["spin-start", "spin-end"]);
+const emits = defineEmits(['spin-start', 'spin-end']);
 
 const props = withDefaults(
   defineProps<{
@@ -43,7 +43,7 @@ const props = withDefaults(
     extraSpins?: number;
     spinDuration?: number;
     cursorAngle?: number;
-    cursorPosition?: "center" | "edge";
+    cursorPosition?: 'center' | 'edge';
     cursorDistance?: number;
     sounds?: Sounds;
   }>(),
@@ -52,7 +52,7 @@ const props = withDefaults(
     extraSpins: 10,
     spinDuration: 4000,
     cursorAngle: 270,
-    cursorPosition: "center",
+    cursorPosition: 'center',
     cursorDistance: 50,
     sounds: () => ({
       spinning: null,
@@ -71,7 +71,7 @@ function getSlices(): Slice[] {
 
 function getContrastingColor(bgColor: string): string {
   let color = bgColor;
-  if (bgColor.charAt(0) === "#") {
+  if (bgColor.charAt(0) === '#') {
     color = bgColor.substring(1, 7);
   }
 
@@ -81,7 +81,7 @@ function getContrastingColor(bgColor: string): string {
 
   const brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
-  return brightness > 125 ? "black" : "white";
+  return brightness > 125 ? 'black' : 'white';
 }
 
 function getAnglePerSlice(): number {
@@ -105,8 +105,12 @@ function getNormalizedAngle(angle: number): number {
 function getSliceAngles(sliceIndex: number, currentCanvasAngle: number) {
   const slices = getSlices();
   const anglePerSlice = 360 / slices.length;
-  const startAngle = getNormalizedAngle(currentCanvasAngle + anglePerSlice * sliceIndex);
-  const endAngle = getNormalizedAngle(currentCanvasAngle + startAngle + anglePerSlice);
+  const startAngle = getNormalizedAngle(
+    currentCanvasAngle + anglePerSlice * sliceIndex
+  );
+  const endAngle = getNormalizedAngle(
+    currentCanvasAngle + startAngle + anglePerSlice
+  );
 
   return {
     startAngle,
@@ -161,10 +165,10 @@ function drawLabel(
   const textRotateAngle = (endAngle - startAngle) / 2 + startAngle;
   context.translate(centerX, centerY);
   context.rotate(degreesToRadians(textRotateAngle));
-  context.textAlign = "right";
-  context.textBaseline = "middle";
+  context.textAlign = 'right';
+  context.textBaseline = 'middle';
   context.fillStyle = getContrastingColor(fillColor);
-  context.font = "bold 16px Arial";
+  context.font = 'bold 16px Arial';
   context.fillText(sliceLabel, radius - 10, 0);
   context.restore();
 }
@@ -184,7 +188,7 @@ function drawWheel() {
 
   if (!canvas || !container) return;
   // Access canvas and context.
-  const context = canvas.getContext("2d");
+  const context = canvas.getContext('2d');
   if (!context) return;
 
   const containerWidth = container.clientWidth;
@@ -212,7 +216,15 @@ function drawWheel() {
     const endAngle = startAngle + anglePerSlice;
 
     // Draw slice
-    drawSlice(context, centerX, centerY, radius, startAngle, endAngle, slice.color);
+    drawSlice(
+      context,
+      centerX,
+      centerY,
+      radius,
+      startAngle,
+      endAngle,
+      slice.color
+    );
 
     // Draw slice label
     drawLabel(
@@ -246,12 +258,12 @@ function spinWheel(winnerIndex: number) {
   }
 
   // Emit spin start event
-  emits("spin-start");
+  emits('spin-start');
 
   // Get canvas and container
   const canvas = playgroundCanvas.value;
   if (!canvas) {
-    console.log("Canvas not found");
+    console.log('Canvas not found');
     return;
   }
 
@@ -262,7 +274,10 @@ function spinWheel(winnerIndex: number) {
   const extraSpinsAngle = extraSpins * 360;
 
   // Get winner start and end angle with current status
-  const { endAngle: winnerEndAngle } = getSliceAngles(winnerIndex, currentAngle.value);
+  const { endAngle: winnerEndAngle } = getSliceAngles(
+    winnerIndex,
+    currentAngle.value
+  );
 
   // Calculate target angle
   const targetAngle =
@@ -279,7 +294,8 @@ function spinWheel(winnerIndex: number) {
     const elapsedTime = currentTime - startTime;
     const progress = Math.min(elapsedTime / props.spinDuration, 1);
 
-    let rotationAngle = currentAngle.value + targetAngle * getEaseInOutQuart(progress);
+    let rotationAngle =
+      currentAngle.value + targetAngle * getEaseInOutQuart(progress);
     canvas.style.transform = `rotate3d(0, 0, 1, ${rotationAngle}deg)`;
 
     if (progress < 1) {
@@ -295,7 +311,7 @@ function spinWheel(winnerIndex: number) {
         wonAudio.value.play();
       }
 
-      emits("spin-end", winnerIndex);
+      emits('spin-end', winnerIndex);
 
       // Stop spinning sound
       if (spinningAudio.value) {
@@ -324,41 +340,45 @@ function stopAudio(audio: HTMLAudioElement | null) {
 
 function getCursorXY() {
   if (!cursor.value) {
-    console.log("Cursor not found");
+    console.log('Cursor not found');
     return;
   }
   const cursorAngle = getCursorAngle();
   const cursorPosition = props.cursorPosition;
 
-  if (cursorPosition === "edge") {
+  if (cursorPosition === 'edge') {
     const rotate = getNormalizedAngle(cursorAngle + 90);
     const cursorWidth = cursor.value.clientWidth;
     const cursorHeight = cursor.value.clientHeight;
-    const top = Math.sin(degreesToRadians(cursorAngle)) * 50 + 50 + "%";
-    const left = Math.cos(degreesToRadians(cursorAngle)) * 50 + 50 + "%";
+    const top = Math.sin(degreesToRadians(cursorAngle)) * 50 + 50 + '%';
+    const left = Math.cos(degreesToRadians(cursorAngle)) * 50 + 50 + '%';
     const additionalX =
-      Math.cos(degreesToRadians(cursorAngle)) * (props.cursorDistance + cursorWidth / 2);
+      Math.cos(degreesToRadians(cursorAngle)) *
+      (props.cursorDistance + cursorWidth / 2);
     const additionalY =
-      Math.sin(degreesToRadians(cursorAngle)) * (props.cursorDistance + cursorHeight / 2);
+      Math.sin(degreesToRadians(cursorAngle)) *
+      (props.cursorDistance + cursorHeight / 2);
 
     return {
       top: top,
       left: left,
-      translateX: "calc(-50% - " + additionalX + "px)",
-      translateY: "calc(-50% - " + additionalY + "px)",
-      rotate: rotate + "deg",
+      translateX: 'calc(-50% - ' + additionalX + 'px)',
+      translateY: 'calc(-50% - ' + additionalY + 'px)',
+      rotate: rotate + 'deg',
     };
   } else {
     const rotate = getNormalizedAngle(cursorAngle + 270);
-    const additionalX = Math.cos(degreesToRadians(cursorAngle)) * props.cursorDistance;
-    const additionalY = Math.sin(degreesToRadians(cursorAngle)) * props.cursorDistance;
+    const additionalX =
+      Math.cos(degreesToRadians(cursorAngle)) * props.cursorDistance;
+    const additionalY =
+      Math.sin(degreesToRadians(cursorAngle)) * props.cursorDistance;
 
     return {
-      top: "50%",
-      left: "50%",
-      translateX: "calc(-50% + " + additionalX + "px)",
-      translateY: "calc(-50% + " + additionalY + "px)",
-      rotate: rotate + "deg",
+      top: '50%',
+      left: '50%',
+      translateX: 'calc(-50% + ' + additionalX + 'px)',
+      translateY: 'calc(-50% + ' + additionalY + 'px)',
+      rotate: rotate + 'deg',
     };
   }
 }
@@ -367,7 +387,7 @@ function positionCursor() {
   // Set cursor position
   const cursorXY = getCursorXY();
   if (!cursorXY || !cursor.value) {
-    console.log("Cursor not found");
+    console.log('Cursor not found');
     return;
   }
   const { top, left, translateX, translateY, rotate } = cursorXY;
@@ -413,11 +433,11 @@ watch(
 );
 
 onBeforeMount(() => {
-  window.addEventListener("resize", handleResize);
+  window.addEventListener('resize', handleResize);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", handleResize);
+  window.removeEventListener('resize', handleResize);
 });
 
 onMounted(() => {
@@ -469,3 +489,5 @@ canvas {
   max-width: 100%;
 }
 </style>
+
+來源出處 : https://github.com/ilyasozkurt/vue-wheel-spinner

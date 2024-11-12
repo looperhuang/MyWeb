@@ -26,8 +26,8 @@ const memeApi = axios.create({
   baseURL: 'https://memes.tw/wtf',
 });
 
-const getHotMeme = async () => {
-  const url = '/api';
+const getHotMeme = async (page: number | 'first' | 'last') => {
+  const url = `/api?page=${page}`;
   const res = await memeApi.get<Meme[]>(url);
   return res.data;
 };

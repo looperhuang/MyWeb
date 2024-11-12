@@ -5,27 +5,7 @@
         <div class="col-4">
           <div class="q-gutter-md">
             <div class="text-h6 text-bold">Options</div>
-            <q-toggle
-              :label="'CursorPosition: ' + cursorPosition"
-              false-value="edge"
-              true-value="center"
-              v-model="cursorPosition"
-            />
-
-            <q-input
-              type="number"
-              filled
-              label="CursorAngle"
-              v-model="cursorAngle"
-            />
-
-            <q-input
-              type="number"
-              filled
-              label="CursorDistance"
-              v-model="cursorDistance"
-            />
-
+            <q-toggle :label="'重複抽取: ' + remain" v-model="remain" />
             <q-list bordered separator>
               <q-item v-for="(s, idx) in slices" :key="idx" clickable>
                 <q-item-section avatar>
@@ -104,6 +84,7 @@ import { ref } from 'vue';
 import VueWheelSpinner, { Slice, Sounds } from 'src/components/SpinWheel.vue';
 import { Dialog } from 'quasar';
 
+const remain = ref(true);
 const spinner = ref<InstanceType<typeof VueWheelSpinner> | null>(null);
 const cursorImage = ref<string>('src/assets/arrow.png');
 const slices = ref<Slice[]>([
@@ -150,6 +131,11 @@ const onSpinEnd = (winnerIndex: number) => {
     title: 'Winner',
     message: `You won ${winnerResult.value.text}!`,
   });
+
+  // 是否重複抽取模式
+  if (!remain.value) {
+    removeSlice(winnerIndex);
+  }
 };
 
 const handleSpinButtonClick = () => {
