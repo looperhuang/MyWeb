@@ -98,6 +98,11 @@ const menus = [
     icon: 'image',
     to: 'imgpreview',
   },
+  {
+    label: '氣象預報',
+    icon: 'cloud',
+    to: 'pre36',
+  },
 ];
 
 const outers = [

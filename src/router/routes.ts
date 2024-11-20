@@ -45,6 +45,11 @@ const routes: RouteRecordRaw[] = [
         path: 'imgpreview',
         component: () => import('pages/ImgPreview/IndexPage.vue'),
       },
+      {
+        name:'pre36',
+        path:'pre36',
+        component:() => import('pages/pre36/IndexPage.vue')
+      }
     ],
   },
 
