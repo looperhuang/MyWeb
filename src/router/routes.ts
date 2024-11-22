@@ -46,10 +46,15 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/ImgPreview/IndexPage.vue'),
       },
       {
-        name:'pre36',
-        path:'pre36',
-        component:() => import('pages/pre36/IndexPage.vue')
-      }
+        name: 'pre36',
+        path: 'pre36',
+        component: () => import('pages/pre36/IndexPage.vue'),
+      },
+      {
+        name: 'alarm',
+        path: 'alarm',
+        component: () => import('pages/alarmClock/IndexPage.vue'),
+      },
     ],
   },
 

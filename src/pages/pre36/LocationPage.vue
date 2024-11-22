@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { Pre36Location, Pre36Element } from 'src/services/weather';
+import { Pre36Location } from 'src/services/weather';
 import { computed } from 'vue';
 const props = defineProps<{
   location: Pre36Location | null;

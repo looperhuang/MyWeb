@@ -41,6 +41,24 @@
             </q-list>
           </q-menu>
         </q-btn>
+        <q-btn label="Clock" icon="schedule">
+          <q-menu>
+            <q-list>
+              <q-item
+                v-for="c in clock"
+                :key="c.label"
+                clickable
+                v-ripple
+                :to="c.to"
+              >
+                <q-item-section avatar>
+                  <q-icon :name="c.icon" />
+                </q-item-section>
+                <q-item-section>{{ c.label }}</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
         <q-space />
         <!-- <q-btn dense flat icon="minimize" @click="minimize" />
         <q-btn dense flat icon="crop_square" @click="maxmize" />
@@ -78,11 +96,7 @@ const menus = [
     icon: 'collections',
     to: 'meme',
   },
-  {
-    label: '下班',
-    icon: 'timer',
-    to: 'offwork',
-  },
+
   {
     label: '抽午餐',
     icon: 'support',
@@ -115,6 +129,24 @@ const outers = [
     label: 'fre321',
     icon: 'article',
     link: 'https://www.fre321.com/',
+  },
+  {
+    label: "looper's blog",
+    icon: 'article',
+    link: 'https://looperhuang.github.io/',
+  },
+];
+
+const clock = [
+  {
+    label: '倒數計時',
+    icon: 'timer',
+    to: 'offwork',
+  },
+  {
+    label: '鬧鐘',
+    icon: 'alarm',
+    to: 'alarm',
   },
 ];
 </script>
