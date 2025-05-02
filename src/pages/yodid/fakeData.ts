@@ -1,0 +1,55 @@
+import type { Form } from './models/Form';
+
+export const fake: Form = {
+  env_code: 'EO10001M01',
+  env_name: 'SCC250100152 案件初審',
+  version: '1.0',
+  enable: true,
+  start_date: '2025/03/02',
+  end_date: '9999/12/31',
+  tree: 'TW2',
+  button_temp: '1 案件進件',
+  accept: true,
+  reject: true,
+  requestEnable: true,
+  requestList: [],
+  requestOther: '',
+  notifyType: [],
+  notifyDetail: [
+    {
+      label: '結案',
+      enabled: false,
+      type: '',
+      template: null,
+      receiver: [],
+    },
+    {
+      label: '抽單',
+      enabled: false,
+      type: '',
+      template: null,
+      receiver: [],
+    },
+    {
+      label: '退回',
+      enabled: false,
+      type: '',
+      template: null,
+      receiver: [],
+    },
+    {
+      label: '否決',
+      enabled: false,
+      type: '',
+      template: null,
+      receiver: [],
+    },
+    {
+      label: '待簽核',
+      enabled: false,
+      type: '',
+      template: null,
+      receiver: [],
+    },
+  ],
+};

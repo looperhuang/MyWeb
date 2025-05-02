@@ -117,6 +117,16 @@ const menus = [
     icon: 'cloud',
     to: 'pre36',
   },
+  {
+    label: '數獨',
+    icon: 'tag',
+    to: 'sudoku',
+  },
+  {
+    label: 'yodid',
+    icon: 'web',
+    to: 'yodid',
+  },
 ];
 
 const outers = [
@@ -147,6 +157,11 @@ const clock = [
     label: '鬧鐘',
     icon: 'alarm',
     to: 'alarm',
+  },
+  {
+    label: '計時器',
+    icon: 'timer',
+    to: 'countdown',
   },
 ];
 </script>

@@ -17,7 +17,12 @@
           <q-img :src="m.src" @click="fetchSource(m.url)" />
 
           <q-card-section class="text-body1">
-            <a :href="m.src" target="_blank" rel="noreferrer noopener">
+            <a
+              :href="m.src"
+              target="_blank"
+              rel="noreferrer noopener"
+              style="color: white"
+            >
               {{ m.title }}
             </a>
           </q-card-section>

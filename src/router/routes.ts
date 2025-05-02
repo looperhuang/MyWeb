@@ -55,6 +55,21 @@ const routes: RouteRecordRaw[] = [
         path: 'alarm',
         component: () => import('pages/alarmClock/IndexPage.vue'),
       },
+      {
+        name: 'countdown',
+        path: 'countdown',
+        component: () => import('pages/countDown/IndexPage.vue'),
+      },
+      {
+        name: 'sudoku',
+        path: 'sudoku',
+        component: () => import('pages/sudoku/IndexPage.vue'),
+      },
+      {
+        name: 'yodid',
+        path: 'yodid',
+        component: () => import('pages/yodid/IndexPage.vue'),
+      },
     ],
   },
 
