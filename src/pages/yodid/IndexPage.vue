@@ -24,7 +24,10 @@
                 <el-col :span="8" style="align-self: end">
                   <el-switch
                     v-model="data.enable"
-                    style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+                    style="
+                      --el-switch-on-color: #13ce66;
+                      --el-switch-off-color: #ff4949;
+                    "
                     active-text="啟用"
                   />
                 </el-col>
@@ -39,13 +42,7 @@
             </el-col>
             <el-col :span="8">
               <el-text>組織樹</el-text>
-              <el-input v-model="data.tree">
-                <template #append>
-                  <el-button style="background-color: orange; color: white"
-                    >...</el-button
-                  >
-                </template>
-              </el-input>
+              <FileSelector v-model="data.tree" />
             </el-col>
             <el-col :span="8">
               <div>
@@ -53,7 +50,7 @@
               </div>
               <el-select v-model="data.button_temp">
                 <el-option
-                  v-for="item in options"
+                  v-for="item in defaultOptions"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
@@ -65,31 +62,27 @@
                 <el-text>重啟簽核流程設定</el-text>
               </div>
               <el-checkbox
-                v-model="data.accept"
-                label="流程已成立後可再送單"
+                v-for="item in signSettings"
+                :key="item.label"
+                v-model="data[item.field]"
                 size="large"
-              />
-              <el-checkbox
-                v-model="data.reject"
-                label="流程已否決/抽單後可再送單"
-                size="large"
-              />
+              >
+                {{ item.label }}
+              </el-checkbox>
             </el-col>
           </el-row>
         </el-col>
 
         <el-col :span="4">
           <el-space direction="vertical">
-            <el-button type="warning" class="myButton" :icon="Tools">
-              場景參數設定
-            </el-button>
-
-            <el-button type="warning" class="myButton" :icon="EditPen">
-              流程繪製
-            </el-button>
-
-            <el-button type="warning" class="myButton" :icon="VideoPlay">
-              流程模擬器
+            <el-button
+              v-for="item in settingBtns"
+              :key="item.label"
+              :icon="item.icon"
+              type="warning"
+              class="myButton"
+            >
+              {{ item.label }}
             </el-button>
           </el-space>
         </el-col>
@@ -107,48 +100,42 @@
       />
     </el-card>
 
+    <FileSelector v-model="file" />
     {{ data }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { Plus, Tools, VideoPlay, EditPen, Calendar } from "@element-plus/icons-vue";
-import RequestSetting from "./RequestSetting.vue";
-import NotificationSetting from "./NotificationSetting.vue";
-import type { Form } from "./models/Form";
-import { fake } from "./fakeData";
+import { ref } from 'vue';
+import {
+  Plus,
+  Tools,
+  VideoPlay,
+  EditPen,
+  Calendar,
+} from '@element-plus/icons-vue';
+import RequestSetting from './RequestSetting.vue';
+import NotificationSetting from './NotificationSetting.vue';
+import type { Form } from './models/Form';
+import { fake } from './fakeData';
+import { defaultOptions } from './SelectOptions';
+import FileSelector from './components/FileSelector.vue';
 
 const data = ref<Form>(fake);
+const file = ref<File | null>(null);
+const settingBtns = [
+  { label: '場景參數設定', icon: Tools },
+  { label: '流程繪製', icon: EditPen },
+  { label: ' 流程模擬器', icon: VideoPlay },
+];
 
-const options = [
-  {
-    value: "Option1",
-    label: "Option1",
-  },
-  {
-    value: "Option2",
-    label: "Option2",
-  },
-  {
-    value: "Option3",
-    label: "Option3",
-  },
-  {
-    value: "Option4",
-    label: "Option4",
-  },
-  {
-    value: "Option5",
-    label: "Option5",
-  },
+const signSettings: { label: string; field: keyof Form }[] = [
+  { label: '流程已成立後可再送單', field: 'accept' },
+  { label: '流程已否決/抽單後可再送單', field: 'reject' },
 ];
 </script>
 
 <style scoped>
-.ButtonSide {
-  margin-bottom: 20px;
-}
 .myButton {
   text-align: left;
   width: 150px;
