@@ -91,6 +91,15 @@
       <RequestSetting v-model="data.request" />
       <NotificationSetting v-model="data.notify" />
       <UrgeSetting v-model="data.urge" />
+
+      <el-tabs v-model="activeName" class="demo-tabs">
+        <el-tab-pane label="關卡" name="CheckPoint">
+          <CheckPoint v-model="data.checkpoints" />
+        </el-tab-pane>
+        <el-tab-pane label="場景所需參數" name="ParamList">
+          參數....
+        </el-tab-pane>
+      </el-tabs>
     </el-card>
 
     {{ data }}
@@ -109,10 +118,11 @@ import {
 } from '@element-plus/icons-vue';
 import RequestSetting from './RequestSetting.vue';
 import NotificationSetting from './NotificationSetting.vue';
+import UrgeSetting from './UrgeSetting.vue';
+import CheckPoint from './CheckPoint.vue';
 import type { Form } from './models/Form';
 import { fake } from './fakeData';
 import { defaultOptions } from './SelectOptions';
-import UrgeSetting from './UrgeSetting.vue';
 
 const data = ref<Form>(fake);
 const settingBtns = [
@@ -124,6 +134,7 @@ const signSettings: { label: string; field: keyof Form }[] = [
   { label: '流程已成立後可再送單', field: 'accept' },
   { label: '流程已否決/抽單後可再送單', field: 'reject' },
 ];
+const activeName = ref<string>('CheckPoint');
 </script>
 
 <style scoped>

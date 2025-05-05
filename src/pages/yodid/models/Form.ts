@@ -1,6 +1,7 @@
 import type { Notify } from './Notify';
 import type { Urge } from './Urge';
 import type { Request } from './Request';
+import type { CheckPoint } from './CheckPoint';
 export interface Form {
   env_code: string;
   env_name: string;
@@ -15,4 +16,5 @@ export interface Form {
   request: Request;
   notify: Notify;
   urge: Urge;
+  checkpoints: CheckPoint[];
 }
