@@ -1,3 +1,8 @@
+export interface Notify {
+  type: string[];
+  detail: NotifyDetail[];
+}
+
 export interface NotifyDetail {
   label: string;
   enabled: boolean;

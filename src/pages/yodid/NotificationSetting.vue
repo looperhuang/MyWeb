@@ -3,7 +3,7 @@
     <div>通知設定</div>
     <div>通知類型</div>
     <div>
-      <el-checkbox-group v-model="type">
+      <el-checkbox-group v-model="notify.type">
         <el-checkbox
           v-for="(item, idx) in checkboxes"
           :key="idx"
@@ -17,7 +17,7 @@
         <el-col :span="12"> 發送通知 </el-col>
         <el-col :span="12"> 通知對象(起始關卡) </el-col>
       </el-row>
-      <template v-for="item in detail" :key="item.label">
+      <template v-for="item in notify.detail" :key="item.label">
         <el-row>
           <el-col :span="2">
             <el-checkbox
@@ -32,20 +32,10 @@
           <el-col :span="8">
             <el-radio-group v-model="item.type" :disabled="!item.enabled">
               <el-radio value="S">公版</el-radio>
-              <el-input
+              <FileSelect
                 v-model="item.template"
-                :disabled="!(item.type == 'S')"
-                style="width: 150px; margin-left: 10px; margin-right: 10px"
-              >
-                <template #append>
-                  <el-button
-                    :disabled="!(item.type == 'S')"
-                    style="background-color: orange; color: white"
-                  >
-                    ...
-                  </el-button>
-                </template>
-              </el-input>
+                :disable="!(item.type == 'S')"
+              />
               <el-radio value="C">表單自訂</el-radio>
             </el-radio-group>
           </el-col>
@@ -70,31 +60,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { NotifyDetail } from './models/NotifyDetail';
+import { useVModel } from '@vueuse/core';
+import type { Notify, NotifyDetail } from './models/Notify';
+import FileSelect from './components/FileSelector.vue';
 const checkboxes = ['EIP推播', 'E-Mail', '簡訊'];
 const receivers = ['填單人', '申請人'];
-type Prop = {
-  notifyType: string[];
-  notifyDetail: NotifyDetail[];
-};
+type Prop = { modelValue: Notify };
 const props = withDefaults(defineProps<Prop>(), {
-  notifyType: () => [],
-  notifyDetail: () => [],
+  modelValue: () => ({
+    type: [],
+    detail: [],
+  }),
 });
-const emit = defineEmits<{
-  (e: 'update:notifyType', v: string[]): void;
-  (e: 'update:notifyDetail', v: NotifyDetail[]): void;
-}>();
-const type = computed({
-  get: () => props.notifyType,
-  set: (v) => emit('update:notifyType', v),
-});
-const detail = computed({
-  get: () => props.notifyDetail,
-  set: (v) => emit('update:notifyDetail', v),
-});
-
+const emit = defineEmits(['update:modelValue']);
+const notify = useVModel(props, 'modelValue', emit);
 const onChboxChange = (item: NotifyDetail) => {
   if (!item.enabled) {
     item.type = '';

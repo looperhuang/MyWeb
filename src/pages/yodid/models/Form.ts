@@ -1,4 +1,6 @@
-import type { NotifyDetail } from './NotifyDetail';
+import type { Notify } from './Notify';
+import type { Urge } from './Urge';
+import type { Request } from './Request';
 export interface Form {
   env_code: string;
   env_name: string;
@@ -10,9 +12,7 @@ export interface Form {
   button_temp: string;
   accept: true;
   reject: true;
-  requestEnable: true;
-  requestList: string[];
-  requestOther: string;
-  notifyType: string[];
-  notifyDetail: NotifyDetail[];
+  request: Request;
+  notify: Notify;
+  urge: Urge;
 }

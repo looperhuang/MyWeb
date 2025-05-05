@@ -2,7 +2,13 @@
   <div>
     <el-input :model-value="fileData?.name || ''" readonly>
       <template #append>
-        <el-button @click="openFileDialog" class="upload_btn">...</el-button>
+        <el-button
+          @click="openFileDialog"
+          :disabled="disable"
+          class="upload_btn"
+        >
+          ...
+        </el-button>
       </template>
     </el-input>
 
@@ -20,9 +26,11 @@
 import { computed, ref } from 'vue';
 type Prop = {
   modelValue: File | null;
+  disable?: boolean;
 };
 const props = withDefaults(defineProps<Prop>(), {
   modelValue: null,
+  disable: false,
 });
 const emit = defineEmits(['update:modelValue']);
 const fileData = computed({

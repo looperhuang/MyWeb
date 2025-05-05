@@ -42,7 +42,7 @@
             </el-col>
             <el-col :span="8">
               <el-text>組織樹</el-text>
-              <FileSelector v-model="data.tree" />
+              <FileSelect v-model="data.tree" />
             </el-col>
             <el-col :span="8">
               <div>
@@ -88,25 +88,18 @@
         </el-col>
       </el-row>
 
-      <RequestSetting
-        v-model:requestEnable="data.requestEnable"
-        v-model:requestList="data.requestList"
-        v-model:requestOther="data.requestOther"
-      />
-
-      <NotificationSetting
-        v-model:notify-type="data.notifyType"
-        v-model:notify-detail="data.notifyDetail"
-      />
+      <RequestSetting v-model="data.request" />
+      <NotificationSetting v-model="data.notify" />
+      <UrgeSetting v-model="data.urge" />
     </el-card>
 
-    <FileSelector v-model="file" />
     {{ data }}
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import FileSelect from './components/FileSelector.vue';
 import {
   Plus,
   Tools,
@@ -119,16 +112,14 @@ import NotificationSetting from './NotificationSetting.vue';
 import type { Form } from './models/Form';
 import { fake } from './fakeData';
 import { defaultOptions } from './SelectOptions';
-import FileSelector from './components/FileSelector.vue';
+import UrgeSetting from './UrgeSetting.vue';
 
 const data = ref<Form>(fake);
-const file = ref<File | null>(null);
 const settingBtns = [
   { label: '場景參數設定', icon: Tools },
   { label: '流程繪製', icon: EditPen },
   { label: ' 流程模擬器', icon: VideoPlay },
 ];
-
 const signSettings: { label: string; field: keyof Form }[] = [
   { label: '流程已成立後可再送單', field: 'accept' },
   { label: '流程已否決/抽單後可再送單', field: 'reject' },

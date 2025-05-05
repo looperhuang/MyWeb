@@ -5,7 +5,7 @@
     <el-row :gutter="20">
       <el-col :span="4">
         <el-switch
-          v-model="enable"
+          v-model="request.enable"
           style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
           active-text="啟用"
           @change="onSwitchChange"
@@ -13,23 +13,23 @@
       </el-col>
       <el-col :span="20">
         <el-text>於流程結束前加入請示關卡，該關卡可執行動作</el-text>
-        <el-checkbox-group v-model="list" @change="onCheckboxChange">
+        <el-checkbox-group v-model="request.list" @change="onCheckboxChange">
           <el-checkbox
             v-for="(item, idx) in checkboxes"
             :key="idx"
-            :disabled="!enable"
+            :disabled="!request.enable"
             :label="item"
             :value="item"
           />
         </el-checkbox-group>
         <el-select
-          v-model="other"
-          :disabled="!list.includes('退回指定關卡')"
+          v-model="request.other"
+          :disabled="!request.list.includes('退回指定關卡')"
           placeholder="Select"
           style="width: 240px"
         >
           <el-option
-            v-for="item in options"
+            v-for="item in defaultOptions"
             :key="item.value"
             :label="item.label"
             :value="item.value"
@@ -41,7 +41,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { useVModel } from '@vueuse/core';
+import type { Request } from './models/Request';
+import { defaultOptions } from './SelectOptions';
+type Prop = { modelValue: Request };
+const props = withDefaults(defineProps<Prop>(), {
+  modelValue: () => ({
+    enable: true,
+    list: [],
+    other: '',
+  }),
+});
+const emit = defineEmits(['update:modelValue']);
+const request = useVModel(props, 'modelValue', emit);
 const checkboxes = [
   '同意',
   '不同意',
@@ -52,61 +64,12 @@ const checkboxes = [
   '退回任一關卡',
   '退回指定關卡',
 ];
-const options = [
-  {
-    value: 'Option1',
-    label: 'Option1',
-  },
-  {
-    value: 'Option2',
-    label: 'Option2',
-  },
-  {
-    value: 'Option3',
-    label: 'Option3',
-  },
-  {
-    value: 'Option4',
-    label: 'Option4',
-  },
-  {
-    value: 'Option5',
-    label: 'Option5',
-  },
-];
-type Prop = {
-  requestEnable: boolean;
-  requestList: string[];
-  requestOther: string;
-};
-const props = withDefaults(defineProps<Prop>(), {
-  requestEnable: true,
-  requestList: () => [],
-  requestOther: '',
-});
-const emit = defineEmits<{
-  (e: 'update:requestEnable', v: boolean): void;
-  (e: 'update:requestList', v: string[]): void;
-  (e: 'update:requestOther', v: string): void;
-}>();
-const enable = computed<boolean>({
-  get: () => props.requestEnable,
-  set: (v) => emit('update:requestEnable', v),
-});
-const list = computed<string[]>({
-  get: () => props.requestList,
-  set: (v) => emit('update:requestList', v),
-});
-const other = computed<string>({
-  get: () => props.requestOther,
-  set: (v) => emit('update:requestOther', v),
-});
 const onCheckboxChange = () => {
-  if (!list.value.includes('退回指定關卡')) other.value = '';
+  if (!request.value.list.includes('退回指定關卡')) request.value.other = '';
 };
 const onSwitchChange = () => {
-  list.value = [];
-  other.value = '';
+  request.value.list = [];
+  request.value.other = '';
 };
 </script>
 
