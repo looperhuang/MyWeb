@@ -70,6 +70,16 @@ const routes: RouteRecordRaw[] = [
         path: 'yodid',
         component: () => import('pages/yodid/IndexPage.vue'),
       },
+      {
+        name: 'hotpotaction',
+        path: 'hotpotaction',
+        component: () => import('pages/hotpotaction/IndexPage.vue'),
+      },
+      {
+        name: 'workmanager',
+        path: 'workmanager',
+        component: () => import('pages/WorkManager/IndexPage.vue'),
+      },
     ],
   },
 

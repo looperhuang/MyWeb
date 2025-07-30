@@ -97,12 +97,10 @@
           <CheckPoint v-model="data.checkpoints" />
         </el-tab-pane>
         <el-tab-pane label="場景所需參數" name="ParamList">
-          參數....
+          <ParamList />
         </el-tab-pane>
       </el-tabs>
     </el-card>
-
-    {{ data }}
   </div>
 </template>
 
@@ -120,6 +118,7 @@ import RequestSetting from './RequestSetting.vue';
 import NotificationSetting from './NotificationSetting.vue';
 import UrgeSetting from './UrgeSetting.vue';
 import CheckPoint from './CheckPoint.vue';
+import ParamList from './ParamList.vue';
 import type { Form } from './models/Form';
 import { fake } from './fakeData';
 import { defaultOptions } from './SelectOptions';

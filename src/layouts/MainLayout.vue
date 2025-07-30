@@ -118,14 +118,14 @@ const menus = [
     to: 'pre36',
   },
   {
-    label: '數獨',
-    icon: 'tag',
-    to: 'sudoku',
+    label: 'HotPotAction',
+    icon: 'schedule_send',
+    to: 'hotpotaction',
   },
   {
-    label: 'yodid',
-    icon: 'web',
-    to: 'yodid',
+    label: '工作管理',
+    icon: 'work',
+    to: 'workmanager',
   },
 ];
 
