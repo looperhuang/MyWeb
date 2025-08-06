@@ -41,6 +41,27 @@
             </q-list>
           </q-menu>
         </q-btn>
+        <!-- 工具 -->
+        <q-btn label="Utils" icon="settings">
+          <q-menu>
+            <q-list>
+              <q-item
+                v-for="u in utils"
+                :key="u.label"
+                clickable
+                v-ripple
+                :href="u.link"
+                target="_blank"
+              >
+                <q-item-section avatar>
+                  <q-icon :name="u.icon" />
+                </q-item-section>
+                <q-item-section>{{ u.label }}</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
+
         <q-btn label="Clock" icon="schedule">
           <q-menu>
             <q-list>
@@ -82,11 +103,6 @@ import MarqueeBar from 'src/components/MarqueeBar.vue';
 
 const menus = [
   {
-    label: '天氣',
-    icon: 'cloud',
-    to: 'weather',
-  },
-  {
     label: '新聞',
     icon: 'newspaper',
     to: 'news',
@@ -118,11 +134,6 @@ const menus = [
     to: 'pre36',
   },
   {
-    label: 'HotPotAction',
-    icon: 'schedule_send',
-    to: 'hotpotaction',
-  },
-  {
     label: '工作管理',
     icon: 'work',
     to: 'workmanager',
@@ -145,6 +156,11 @@ const outers = [
     icon: 'article',
     link: 'https://looperhuang.github.io/',
   },
+  {
+    label: 'windy',
+    icon: 'cloud',
+    link: 'https://www.windy.com/?24.121,120.703,10,m:elvajv5',
+  },
 ];
 
 const clock = [
@@ -162,6 +178,19 @@ const clock = [
     label: '計時器',
     icon: 'timer',
     to: 'countdown',
+  },
+];
+
+const utils = [
+  {
+    label: 'JWT',
+    icon: 'code',
+    link: 'https://www.jwt.io/',
+  },
+  {
+    label: 'Base64',
+    icon: 'code',
+    link: 'https://www.base64decode.org/',
   },
 ];
 </script>

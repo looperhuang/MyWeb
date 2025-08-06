@@ -10,11 +10,6 @@ const routes: RouteRecordRaw[] = [
         path: 'weather',
         component: () => import('pages/weather/indexPage.vue'),
       },
-      // {
-      //   name: 'keyword',
-      //   path: 'keyword',
-      //   component: () => import('pages/keyword/IndexPage.vue'),
-      // },
       {
         name: 'offwork',
         path: 'offwork',
@@ -59,21 +54,6 @@ const routes: RouteRecordRaw[] = [
         name: 'countdown',
         path: 'countdown',
         component: () => import('pages/countDown/IndexPage.vue'),
-      },
-      {
-        name: 'sudoku',
-        path: 'sudoku',
-        component: () => import('pages/sudoku/IndexPage.vue'),
-      },
-      {
-        name: 'yodid',
-        path: 'yodid',
-        component: () => import('pages/yodid/IndexPage.vue'),
-      },
-      {
-        name: 'hotpotaction',
-        path: 'hotpotaction',
-        component: () => import('pages/hotpotaction/IndexPage.vue'),
       },
       {
         name: 'workmanager',
