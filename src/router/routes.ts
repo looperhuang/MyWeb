@@ -60,6 +60,11 @@ const routes: RouteRecordRaw[] = [
         path: 'workmanager',
         component: () => import('pages/WorkManager/IndexPage.vue'),
       },
+      {
+        name: 'weather',
+        path: 'weather',
+        component: () => import('pages/weather/indexPage.vue'),
+      },
     ],
   },
 

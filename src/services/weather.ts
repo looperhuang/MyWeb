@@ -56,26 +56,48 @@ export { getTxgWeather, getWeatherDesc, GetPre36hr };
 export interface Weather {
   success: boolean;
   records: {
-    locations: [
+    Locations: [
       {
-        dataid: string;
-        locationsName: string;
-        datasetDescription: string;
-        location: [
+        Dataid: string;
+        LocationsName: string;
+        DatasetDescription: string;
+        Location: [
           {
-            locationName: string;
-            geocode: string;
-            lat: number;
-            lon: number;
-            weatherElement: [
+            LocationName: string;
+            Geocode: string;
+            Latitude: number;
+            Longitude: number;
+            WeatherElement: [
               {
-                description: string;
-                elementName: string;
-                time: [
+                ElementName: string;
+                Time: [
                   {
-                    elementValue: [{ measures: string; value: number }];
-                    endTime: Date;
-                    startTime: Date;
+                    ElementValue: [
+                      {
+                        Temperature?: string;
+                        MaxTemperature?: string;
+                        MinTemperature?: string;
+                        DewPoint?: string;
+                        RelativeHumidity?: string;
+                        MaxApparentTemperature?: string;
+                        MinApparentTemperature?: string;
+                        MaxComfortIndex?: string;
+                        MaxComfortIndexDescription?: string;
+                        MinComfortIndex?: string;
+                        MinComfortIndexDescription?: string;
+                        BeaufortScale?: string;
+                        WindSpeed?: string;
+                        WindDirection?: string;
+                        ProbabilityOfPrecipitation?: string;
+                        Weather?: string;
+                        WeatherCode?: string;
+                        UVExposureLevel?: string;
+                        UVIndex?: string;
+                        WeatherDescription?: string;
+                      }
+                    ];
+                    EndTime: Date;
+                    StartTime: Date;
                   }
                 ];
               }

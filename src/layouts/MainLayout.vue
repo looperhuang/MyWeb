@@ -134,6 +134,11 @@ const menus = [
     to: 'pre36',
   },
   {
+    label: '氣象',
+    icon: 'cloud',
+    to: 'weather',
+  },
+  {
     label: '工作管理',
     icon: 'work',
     to: 'workmanager',
